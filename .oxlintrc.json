@@ -1,0 +1,83 @@
+{
+  "plugins": ["typescript", "jsx_a11y", "import", "nextjs", "unicorn", "react"],
+  "rules": {
+    "typescript/consistent-type-imports": "error",
+    "typescript/no-empty-interface": "warn",
+    "typescript/no-explicit-any": "warn",
+    "no-console": "warn",
+    "typescript/no-unnecessary-type-constraint": "warn",
+    "react/jsx-key": "error",
+    "unicorn/prefer-modern-dom-apis": "warn",
+    "no-useless-escape": "warn",
+    "typescript/consistent-type-definitions": "error",
+    "no-constant-condition": "error",
+    "no-duplicate-case": "error",
+    "no-unsafe-optional-chaining": "error",
+    "no-useless-catch": "error",
+    "use-isnan": "error",
+    "valid-typeof": "error",
+    "nextjs/google-font-preconnect": "error",
+    "jsx-a11y/tabindex-no-positive": "error",
+    "nextjs/no-img-element": "error",
+    "oxc/bad-array-method-on-arguments": "error",
+    "unicorn/no-new-array": "error",
+    "unicorn/no-empty-file": "error",
+    "unicorn/no-invalid-fetch-options": "error",
+    "unicorn/no-single-promise-in-promise-methods": "error",
+    "unicorn/no-unnecessary-await": "error",
+    "unicorn/no-useless-length-check": "error",
+    "react/no-array-index-key": "warn",
+    "default-case": "warn",
+    "no-empty": "error",
+    "no-empty-function": "error",
+    "no-eq-null": "warn",
+    "no-plusplus": "error",
+    "no-unused-expressions": "error",
+    "no-var": "error",
+    "react/button-has-type": "warn",
+    "react/no-danger": "error",
+    "typescript/no-empty-object-type": "error",
+    "react/no-unknown-property": "error",
+    "typescript/no-require-imports": "error",
+    "unicorn/no-array-for-each": "error",
+    "unicorn/no-document-cookie": "warn",
+    "eqeqeq": "error",
+    "no-case-declarations": "error",
+    "require-await": "error",
+    "react/jsx-no-useless-fragment": "error",
+    "react/rules-of-hooks": "error",
+    "unicorn/no-useless-switch-case": "error",
+    "unicorn/prefer-query-selector": "error",
+    "curly": "error",
+    "default-case-last": "warn",
+    "default-param-last": "error",
+    "yoda": "error",
+    "typescript/prefer-for-of": "warn",
+    "unicorn/empty-brace-spaces": "error",
+    "unicorn/no-null": "error",
+
+    "jsx_a11y/anchor-has-content": "off",
+    "jsx_a11y/prefer-tag-over-role": "off",
+    "arrow-body-style": [
+      "off",
+      "as-needed",
+      { "requireReturnForObjectLiteral": true }
+    ],
+
+    "unicorn/filename-case": [
+      "warn",
+      {
+        "case": "kebabCase"
+      }
+    ],
+    "no-restricted-imports": [
+      "error",
+      {
+        "name": "react",
+        "importNames": ["default"],
+        "message": "Use named imports for React hooks (e.g., useState, useEffect) instead of importing the entire React module."
+      }
+    ]
+  },
+  "ignorePatterns": ["node_modules", "dist"]
+}
