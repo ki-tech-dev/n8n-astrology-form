@@ -1,4 +1,4 @@
-import { Stars, Moon, Sun, Sparkles, Zap, Compass } from "lucide-react";
+import { Stars, Moon, Sun, Sparkles, Zap } from "lucide-react";
 
 export const BackgroundEffects = () => {
   return (

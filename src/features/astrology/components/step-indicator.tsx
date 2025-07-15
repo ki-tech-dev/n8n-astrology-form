@@ -6,7 +6,7 @@ interface StepIndicatorProps {
 
 export const StepIndicator = ({ currentStep }: StepIndicatorProps) => {
   return (
-    <div className="flex justify-between items-center mb-6 relative">
+    <div className="flex justify-around items-center mb-6 relative">
       {steps.map((step) => {
         const StepIcon = step.icon;
         const isActive = currentStep === step.id;

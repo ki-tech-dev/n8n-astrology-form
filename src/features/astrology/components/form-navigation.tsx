@@ -23,7 +23,7 @@ export const FormNavigation = ({
   const currentStepData = steps[currentStep - 1];
 
   return (
-    <div className="flex justify-between items-center mt-8 pt-6 border-t border-slate-700/50">
+    <div className="flex justify-between items-center mt-4 pt-6 border-t border-slate-700/50">
       <Button
         type="button"
         variant="outline"

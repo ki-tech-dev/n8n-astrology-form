@@ -4,7 +4,8 @@ import { useState, useEffect, createElement } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
-import { Compass } from "lucide-react";
+import { Compass, ArrowLeft } from "lucide-react";
+import { Link } from "react-router-dom";
 import {
   Card,
   CardContent,
@@ -22,6 +23,7 @@ import { ReviewStep } from "./review-step";
 import { SuccessView } from "./success-view";
 import { BackgroundEffects } from "./background-effects";
 import { FormNavigation } from "./form-navigation";
+import { Button } from "../../../components/ui/button";
 
 const AstrologyForm = () => {
   const [currentStep, setCurrentStep] = useState(() => {
@@ -140,13 +142,16 @@ const AstrologyForm = () => {
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
     try {
-      const response = await fetch(process.env.WEBHOOK_URL!, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      const response = await fetch(
+        "https://primary-production-64bd.up.railway.app/webhook/7d49b94f-ab11-41d6-8468-3f7f37d125c2",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to submit form");
@@ -181,8 +186,21 @@ const AstrologyForm = () => {
 
       <div className="relative z-10 min-h-screen flex items-center justify-center p-4">
         <div className="w-full max-w-4xl mx-auto">
+          {/* Back to Home Button */}
+          <div className="mb-6 animate-in fade-in slide-in-from-top duration-700">
+            <Link to="/">
+              <Button
+                variant="outline"
+                className="border-purple-400  hover:bg-purple-400/10 px-4 py-2 rounded-full font-medium hover:text-white transition-all duration-300"
+              >
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                Back to Home
+              </Button>
+            </Link>
+          </div>
+
           <div className="text-center mb-8 animate-in fade-in slide-in-from-top duration-1000">
-            <h1 className="text-6xl justify-center flex items-center gap-x-4 font-bold mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent animate-pulse">
+            <h1 className="text-6xl justify-center flex-col-reverse md:flex-row flex items-center gap-4 font-bold mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent animate-pulse">
               Cosmic Navigator
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full blur-xl opacity-50 animate-pulse" />
