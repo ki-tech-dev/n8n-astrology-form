@@ -1,6 +1,5 @@
 import { Toaster } from "react-hot-toast";
-
-import AstrologyForm from "./components/astrology-form";
+import { AstrologyForm } from "./features/astrology";
 
 const App = () => {
   return (
