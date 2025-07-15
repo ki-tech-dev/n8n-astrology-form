@@ -49,18 +49,6 @@ export const BackgroundEffects = () => {
         />
       </div>
 
-      <div className="flex items-center justify-center mb-6">
-        <div className="relative">
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full blur-xl opacity-50 animate-pulse" />
-          <div className="relative bg-gradient-to-r from-purple-600 to-pink-600 p-4 rounded-full">
-            <Compass
-              className="w-8 h-8 text-white animate-spin"
-              style={{ animationDuration: "8s" }}
-            />
-          </div>
-        </div>
-      </div>
-
       <style>{`
         @keyframes float {
           0%,

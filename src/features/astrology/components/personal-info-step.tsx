@@ -83,19 +83,20 @@ export const PersonalInfoStep = ({ form }: PersonalInfoStepProps) => {
             >
               <SelectValue placeholder="Select gender" />
             </SelectTrigger>
+
             <SelectContent className="bg-slate-800/95 backdrop-blur-xl border-slate-700 shadow-2xl">
               <SelectItem
                 value="male"
-                className="text-white hover:bg-blue-500/20 focus:bg-blue-500/20"
+                className="text-white hover:bg-blue-500/20 focus:bg-blue-500/20 cursor-pointer focus:text-white"
               >
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 hover:text-white">
                   <div className="w-2 h-2 bg-blue-400 rounded-full" />
                   Male
                 </div>
               </SelectItem>
               <SelectItem
                 value="female"
-                className="text-white hover:bg-pink-500/20 focus:bg-pink-500/20"
+                className="text-white hover:bg-pink-500/20 focus:bg-pink-500/20 cursor-pointer focus:text-white"
               >
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 bg-pink-400 rounded-full" />
@@ -104,7 +105,7 @@ export const PersonalInfoStep = ({ form }: PersonalInfoStepProps) => {
               </SelectItem>
               <SelectItem
                 value="other"
-                className="text-white hover:bg-purple-500/20 focus:bg-purple-500/20"
+                className="text-white hover:bg-purple-500/20 focus:bg-purple-500/20 cursor-pointer focus:text-white"
               >
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 bg-purple-400 rounded-full" />
@@ -113,6 +114,7 @@ export const PersonalInfoStep = ({ form }: PersonalInfoStepProps) => {
               </SelectItem>
             </SelectContent>
           </Select>
+
           {errors.gender && (
             <p className="text-red-400 text-xs flex items-center gap-1">
               <span className="w-1 h-1 bg-red-400 rounded-full" />

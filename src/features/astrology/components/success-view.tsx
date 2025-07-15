@@ -55,7 +55,10 @@ export const SuccessView = ({
       </h3>
       <p className="text-lg text-slate-300 max-w-md mx-auto mb-8 leading-relaxed">
         Your personalized cosmic blueprint has been created and will be
-        delivered shortly.
+        delivered shortly. <br />
+        <span className="text-sm text-slate-200 font-bold">
+          Please check your email for the chart.
+        </span>
       </p>
       <Button
         onClick={handleCreateAnother}

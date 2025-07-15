@@ -1,1 +1,1 @@
-export { AstrologyForm } from "./components/astrology-form";
+export { default as AstrologyForm } from "./components/astrology-form";

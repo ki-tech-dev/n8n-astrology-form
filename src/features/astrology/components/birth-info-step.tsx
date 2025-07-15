@@ -3,6 +3,8 @@ import { Input } from "../../../components/ui/input";
 import { Label } from "../../../components/ui/label";
 import type { UseFormReturn } from "react-hook-form";
 import type { FormData } from "../schemas/form-schema";
+import { useRef } from "react";
+import { StandaloneSearchBox, useJsApiLoader } from "@react-google-maps/api";
 
 interface BirthInfoStepProps {
   form: UseFormReturn<FormData>;
@@ -11,8 +13,29 @@ interface BirthInfoStepProps {
 export const BirthInfoStep = ({ form }: BirthInfoStepProps) => {
   const {
     register,
+    setValue,
     formState: { errors },
   } = form;
+
+  const inputRef = useRef<any>(null);
+  const { isLoaded } = useJsApiLoader({
+    id: "google-map-script",
+    googleMapsApiKey: "AIzaSyDRimpJ3X4WdjKeBwRAxFjVmQTNBGJaN54",
+    libraries: ["places"],
+  });
+
+  const handlePlacesChanged = () => {
+    const places = inputRef.current?.getPlaces();
+    if (places && places.length > 0) {
+      const place = places[0];
+      setValue("place", place.formatted_address || "", {
+        shouldValidate: true,
+      });
+    }
+  };
+
+  // Register the place input with react-hook-form
+  const placeInputProps = register("place");
 
   return (
     <div className="space-y-4 animate-in fade-in slide-in-from-right duration-700">
@@ -143,23 +166,80 @@ export const BirthInfoStep = ({ form }: BirthInfoStepProps) => {
           <MapPin className="w-4 h-4 text-red-400" />
           Birth Place
         </Label>
-        <Input
-          id="place"
-          placeholder="City, State, Country"
-          {...register("place")}
-          className={`
-            bg-slate-800/50 border-slate-600 text-white placeholder:text-slate-400
-            focus:border-red-500 focus:ring-2 focus:ring-red-500/20
-            transition-all duration-300 h-10 rounded-lg
-            ${errors.place ? "border-red-500" : ""}
-          `}
-        />
-        {errors.place && (
-          <p className="text-red-400 text-xs flex items-center gap-1">
-            <span className="w-1 h-1 bg-red-400 rounded-full" />
-            {errors.place.message}
-          </p>
+
+        {isLoaded ? (
+          <div className="relative">
+            <StandaloneSearchBox
+              onLoad={(ref) => (inputRef.current = ref)}
+              onPlacesChanged={handlePlacesChanged}
+            >
+              <div className="relative">
+                <Input
+                  id="place"
+                  placeholder="Search for your birth location"
+                  {...placeInputProps}
+                  className={`
+                    pl-10 bg-slate-800/50 border-slate-600 text-white placeholder:text-slate-400
+                    focus:border-red-500 focus:ring-2 focus:ring-red-500/20
+                    transition-all duration-300 h-10 rounded-lg
+                    ${errors.place ? "border-red-500" : ""}
+                  `}
+                />
+                <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-red-400">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  </svg>
+                </div>
+              </div>
+            </StandaloneSearchBox>
+
+            {errors.place && (
+              <p className="text-red-400 text-xs mt-1 flex items-center gap-1">
+                <span className="w-1 h-1 bg-red-400 rounded-full" />
+                {errors.place.message}
+              </p>
+            )}
+          </div>
+        ) : (
+          <div className="relative">
+            <Input
+              id="place"
+              placeholder="Loading location search..."
+              disabled
+              className="pl-10 bg-slate-800/50 border-slate-600 text-white placeholder:text-slate-400 h-10 rounded-lg opacity-70"
+            />
+            <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-red-400 animate-pulse">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </div>
+          </div>
         )}
+        <p className="text-xs text-slate-400 mt-1">
+          Enter your exact birth city for accurate cosmic readings
+        </p>
       </div>
     </div>
   );

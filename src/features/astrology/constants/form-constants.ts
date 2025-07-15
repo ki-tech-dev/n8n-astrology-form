@@ -1,4 +1,4 @@
-import { Stars, User, Calendar, CheckCircle } from "lucide-react";
+import { User, Calendar, CheckCircle } from "lucide-react";
 import { step1Schema, step2Schema } from "../schemas/form-schema";
 
 export const STORAGE_KEYS = {

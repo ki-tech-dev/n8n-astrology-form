@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, createElement } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
@@ -31,7 +31,7 @@ const AstrologyForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isResetting, setIsResetting] = useState(false);
-  const [lastSaved, setLastSaved] = useState<Date | null>(() => {
+  const [_lastSaved, setLastSaved] = useState<Date | null>(() => {
     const savedDate = localStorage.getItem(STORAGE_KEYS.LAST_SAVED);
     return savedDate ? new Date(savedDate) : null;
   });
@@ -185,7 +185,8 @@ const AstrologyForm = () => {
       <div className="relative z-10 min-h-screen flex items-center justify-center p-4">
         <div className="w-full max-w-4xl mx-auto">
           <div className="text-center mb-8 animate-in fade-in slide-in-from-top duration-1000">
-            <div className="flex items-center justify-center mb-6">
+            <h1 className="text-6xl justify-center flex items-center gap-x-4 font-bold mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent animate-pulse">
+              Cosmic Navigator
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full blur-xl opacity-50 animate-pulse" />
                 <div className="relative bg-gradient-to-r from-purple-600 to-pink-600 p-4 rounded-full">
@@ -195,9 +196,6 @@ const AstrologyForm = () => {
                   />
                 </div>
               </div>
-            </div>
-            <h1 className="text-6xl font-bold mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent animate-pulse">
-              Cosmic Navigator
             </h1>
             <p className="text-xl text-purple-200 opacity-90 mx-auto leading-relaxed">
               Discover the celestial secrets written in the stars at the moment
@@ -215,11 +213,12 @@ const AstrologyForm = () => {
                 <div
                   className={`p-3 rounded-full bg-gradient-to-r ${currentStepData.color} shadow-lg`}
                 >
-                  {React.createElement(currentStepData.icon, {
+                  {createElement(currentStepData.icon, {
                     className: "w-6 h-6 text-white",
                   })}
                 </div>
               </div>
+
               <CardTitle className="text-2xl font-bold text-white mb-2">
                 {currentStepData.title}
               </CardTitle>
