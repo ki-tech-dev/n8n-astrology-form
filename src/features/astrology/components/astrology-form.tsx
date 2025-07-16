@@ -4,7 +4,7 @@ import { useState, useEffect, createElement } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
-import { Compass, ArrowLeft } from "lucide-react";
+import { Compass } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
   Card,
@@ -24,6 +24,7 @@ import { SuccessView } from "./success-view";
 import { BackgroundEffects } from "./background-effects";
 import { FormNavigation } from "./form-navigation";
 import { Button } from "../../../components/ui/button";
+import { Header } from "../../../components/ui/header";
 
 const AstrologyForm = () => {
   const [currentStep, setCurrentStep] = useState(() => {
@@ -184,93 +185,82 @@ const AstrologyForm = () => {
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 relative overflow-hidden">
       <BackgroundEffects />
 
-      <div className="relative z-10 min-h-screen flex items-center justify-center p-4">
-        <div className="w-full max-w-4xl mx-auto">
-          {/* Back to Home Button */}
-          <div className="mb-6 animate-in fade-in slide-in-from-top duration-700">
-            <Link to="/">
-              <Button
-                variant="outline"
-                className="border-purple-400  hover:bg-purple-400/10 px-4 py-2 rounded-full font-medium hover:text-white transition-all duration-300"
-              >
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Home
-              </Button>
-            </Link>
-          </div>
+      <div className="relative z-10">
+        <Header />
 
-          <div className="text-center mb-8 animate-in fade-in slide-in-from-top duration-1000">
-            <h1 className="text-6xl justify-center flex-col-reverse md:flex-row flex items-center gap-4 font-bold mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent animate-pulse">
-              Cosmic Navigator
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full blur-xl opacity-50 animate-pulse" />
-                <div className="relative bg-gradient-to-r from-purple-600 to-pink-600 p-4 rounded-full">
-                  <Compass
-                    className="w-8 h-8 text-white animate-spin"
-                    style={{ animationDuration: "8s" }}
-                  />
+        <div className="pt-16 min-h-screen flex items-center justify-center p-4">
+          <div className="w-full max-w-4xl mx-auto">
+            <div className="text-center mb-8 animate-in fade-in slide-in-from-top duration-1000">
+              <h1 className="text-6xl justify-center flex-col-reverse md:flex-row flex items-center gap-4 font-bold mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent animate-pulse">
+                Cosmic Navigator
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full blur-xl opacity-50 animate-pulse" />
+                  <div className="relative bg-gradient-to-r from-purple-600 to-pink-600 p-4 rounded-full">
+                    <Compass
+                      className="w-8 h-8 text-white animate-spin"
+                      style={{ animationDuration: "8s" }}
+                    />
+                  </div>
                 </div>
-              </div>
-            </h1>
-            <p className="text-xl text-purple-200 opacity-90 mx-auto leading-relaxed">
-              Discover the celestial secrets written in the stars at the moment
-              of your birth
-            </p>
-          </div>
+              </h1>
+              <p className="text-xl text-purple-200 opacity-90 mx-auto leading-relaxed">
+                Discover the celestial secrets written in the stars at the
+                moment of your birth
+              </p>
+            </div>
 
-          <div className="mb-8 animate-in fade-in slide-in-from-top duration-1000 delay-300">
             <StepIndicator currentStep={currentStep} />
-          </div>
 
-          <Card className="bg-slate-900/40 backdrop-blur-xl border-slate-700/50 shadow-2xl shadow-purple-500/10 animate-in fade-in slide-in-from-bottom duration-1000 delay-500">
-            <CardHeader className="text-center pb-4">
-              <div className="flex items-center justify-center mb-3">
-                <div
-                  className={`p-3 rounded-full bg-gradient-to-r ${currentStepData.color} shadow-lg`}
-                >
-                  {createElement(currentStepData.icon, {
-                    className: "w-6 h-6 text-white",
-                  })}
+            <Card className="bg-slate-900/40 backdrop-blur-xl border-slate-700/50 shadow-2xl shadow-purple-500/10 animate-in fade-in slide-in-from-bottom duration-1000 delay-500">
+              <CardHeader className="text-center pb-4">
+                <div className="flex items-center justify-center mb-3">
+                  <div
+                    className={`p-3 rounded-full bg-gradient-to-r ${currentStepData.color} shadow-lg`}
+                  >
+                    {createElement(currentStepData.icon, {
+                      className: "w-6 h-6 text-white",
+                    })}
+                  </div>
                 </div>
-              </div>
 
-              <CardTitle className="text-2xl font-bold text-white mb-2">
-                {currentStepData.title}
-              </CardTitle>
-              <CardDescription className="text-base text-slate-300 max-w-md mx-auto">
-                {currentStepData.description}
-              </CardDescription>
-            </CardHeader>
+                <CardTitle className="text-2xl font-bold text-white mb-2">
+                  {currentStepData.title}
+                </CardTitle>
+                <CardDescription className="text-base text-slate-300 max-w-md mx-auto">
+                  {currentStepData.description}
+                </CardDescription>
+              </CardHeader>
 
-            <CardContent className="px-6 pb-6">
-              {isSubmitted ? (
-                <SuccessView
-                  form={form}
-                  setIsResetting={setIsResetting}
-                  setIsSubmitted={setIsSubmitted}
-                  setCurrentStep={setCurrentStep}
-                  setLastSaved={setLastSaved}
-                />
-              ) : (
-                <div className="space-y-6">
-                  {currentStep === 1 && <PersonalInfoStep form={form} />}
-                  {currentStep === 2 && <BirthInfoStep form={form} />}
-                  {currentStep === 3 && (
-                    <ReviewStep formData={currentStepFields} />
-                  )}
-
-                  <FormNavigation
-                    currentStep={currentStep}
-                    isSubmitting={isSubmitting}
-                    prevStep={prevStep}
-                    nextStep={nextStep}
-                    onSubmit={onSubmit}
-                    handleSubmit={handleSubmit}
+              <CardContent className="px-6 pb-6">
+                {isSubmitted ? (
+                  <SuccessView
+                    form={form}
+                    setIsResetting={setIsResetting}
+                    setIsSubmitted={setIsSubmitted}
+                    setCurrentStep={setCurrentStep}
+                    setLastSaved={setLastSaved}
                   />
-                </div>
-              )}
-            </CardContent>
-          </Card>
+                ) : (
+                  <div className="space-y-6">
+                    {currentStep === 1 && <PersonalInfoStep form={form} />}
+                    {currentStep === 2 && <BirthInfoStep form={form} />}
+                    {currentStep === 3 && (
+                      <ReviewStep formData={currentStepFields} />
+                    )}
+
+                    <FormNavigation
+                      currentStep={currentStep}
+                      isSubmitting={isSubmitting}
+                      prevStep={prevStep}
+                      nextStep={nextStep}
+                      onSubmit={onSubmit}
+                      handleSubmit={handleSubmit}
+                    />
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
     </div>

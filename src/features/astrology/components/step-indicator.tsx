@@ -16,7 +16,7 @@ export const StepIndicator = ({ currentStep }: StepIndicatorProps) => {
           <div
             key={step.id}
             className={`
-              relative flex flex-col items-center transition-all duration-500 z-10
+              relative flex flex-col items-center transition-all duration-500 z-10 min-w-[100px]
               ${isActive ? "transform scale-110" : ""}
             `}
           >
